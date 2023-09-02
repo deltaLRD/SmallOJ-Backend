@@ -1,0 +1,52 @@
+services:
+  postgres: # 数据库
+    image: 'postgres:latest'
+    container_name: oj_db
+    restart: always
+    environment:
+      - 'POSTGRES_DB=oj'  # 默认数据库
+      - 'POSTGRES_PASSWORD_FILE=/run/secrets/db_pwd'  # 使用文件中的密码保证安全性
+      - 'POSTGRES_USER=oj'  # 默认用户
+    ports:
+      - '5432'
+    volumes:
+      - ./data/db:/var/lib/postgresql/data  # 数据持久化到本地目录
+      - ./config/db/init.sql:/docker-entrypoint-initdb.d/init.sql # 初始化数据库的sql脚本
+    secrets:
+      - db_pwd  # 密码
+
+  adminer:  # 数据库管理
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+  rabbitmq: # 消息队列中间件
+    container_name: oj_mq
+    restart: always
+    image: 'rabbitmq:latest'
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=secret'
+      - 'RABBITMQ_DEFAULT_USER=oj'
+    ports:
+      - '5672'
+    secrets:
+      - mq_pwd
+  redis:  # redis缓存
+    image: 'redis:latest'
+    restart: always
+    container_name: oj_redis
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - ./data/redis:/data
+      - ./config/redis.conf:/etc/redis/redis.conf
+    secrets:
+      - redis_pwd
+secrets:  # 密码文件配置
+  db_pwd:
+    file: ./config/pwd/db_pwd.txt
+  redis_pwd:
+    file: ./config/pwd/redis_pwd.txt
+  mq_pwd:
+    file: ./config/pwd/mq_pwd.txt
