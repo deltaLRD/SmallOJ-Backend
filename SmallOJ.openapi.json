@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.1",
   "info": {
     "title": "SmallOJ",
     "description": "",
@@ -923,13 +923,11 @@
                       "type": "integer"
                     },
                     "pass_data": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
+                      "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/PassData"
-                      }
+                      },
+                      "nullable": true
                     },
                     "status_code": {
                       "type": "integer"
@@ -1294,13 +1292,11 @@
             "type": "integer"
           },
           "pass_data": {
-            "type": [
-              "array",
-              "null"
-            ],
+            "type": "array",
             "items": {
               "$ref": "#/components/schemas/PassData"
-            }
+            },
+            "nullable": true
           }
         },
         "x-apifox-orders": [
