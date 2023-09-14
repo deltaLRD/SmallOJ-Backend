@@ -3,16 +3,17 @@ package com.example.smallojbackend;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.smallojbackend.dao.entity.User;
 import com.example.smallojbackend.dao.mapper.UserMapper;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
     @Test
+    @Order(1)
     void createUser(){
         User user = new User();
         user.setUsername("Lird2002");
@@ -22,6 +23,7 @@ public class UserMapperTest {
         userMapper.insert(user);
     }
     @Test
+    @Order(2)
     void getUser(){
         User user = new User();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -32,6 +34,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Order(3)
     void updateTest(){
         User user = new User();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -45,6 +48,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Order(4)
     void delTest(){
         User user = new User();
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
