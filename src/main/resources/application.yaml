@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/oj
+        username: oj
+        password: Lird2002
+mybatis-plus:
+  global-config:
+    db-config:
+        logic-delete-field: deleted
+        logic-delete-value: 1
+        logic-not-delete-value: 0

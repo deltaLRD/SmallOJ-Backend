@@ -8,7 +8,7 @@ services:
       - 'POSTGRES_PASSWORD=Lird2002'  # 使用文件中的密码保证安全性
       - 'POSTGRES_USER=oj'  # 默认用户
     ports:
-      - '5432'
+      - '5432:5432'
     volumes:
       - ./data/db:/var/lib/postgresql/data  # 数据持久化到本地目录
       - ./config/db/init.sql:/docker-entrypoint-initdb.d/init.sql # 初始化数据库的sql脚本
