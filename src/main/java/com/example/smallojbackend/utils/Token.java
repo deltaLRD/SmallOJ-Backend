@@ -2,10 +2,13 @@ package com.example.smallojbackend.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.security.interfaces.RSAKey;
 import java.util.Date;
 
+@Service
 public class Token {
     private final String key = "SomeRandomChars";
     private final long ExpireTime = 15 * 60 * 1000;
