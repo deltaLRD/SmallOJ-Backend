@@ -3,13 +3,12 @@ package com.example.smallojbackend;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.smallojbackend.dao.entity.User;
 import com.example.smallojbackend.dao.mapper.UserMapper;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
