@@ -12,12 +12,19 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data  # 数据持久化到本地目录
       - ./config/db/init.sql:/docker-entrypoint-initdb.d/init.sql # 初始化数据库的sql脚本
-
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
   adminer:  # 数据库管理
     image: adminer
     restart: always
     ports:
       - 8081:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   rabbitmq: # 消息队列中间件
     container_name: oj_mq
