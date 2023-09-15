@@ -12,7 +12,7 @@ import java.util.Date;
 public class Token {
     private final String key = "SomeRandomChars";
     private final long ExpireTime = 15 * 60 * 1000;
-    public String createToken(String userId) {
+    public String createToken(Long userId) {
         try {
             Date date = new Date(System.currentTimeMillis() + ExpireTime);
             Algorithm algorithm = Algorithm.HMAC256(key);

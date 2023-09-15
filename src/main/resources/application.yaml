@@ -1,7 +1,6 @@
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/oj
-        username: oj
         password: Lird2002
     data:
       redis:
@@ -15,6 +14,7 @@ spring:
             max-idle: 8
             max-wait: -1
             min-idle: 0
+
 mybatis-plus:
   global-config:
     db-config:

@@ -20,7 +20,7 @@ public class RedisTest {
     void redisTest(){
         String username = "Lird2002";
         String token = new String();
-        token = tokenFactory.createToken("12315324-13515-1551");
+        token = tokenFactory.createToken(1231532413511L);
         redisTemplate.boundValueOps(token).set(username);
     }
 }
