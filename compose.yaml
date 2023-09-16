@@ -6,7 +6,7 @@ services:
     environment:
       - 'POSTGRES_DB=oj'  # 默认数据库
       - 'POSTGRES_PASSWORD=Lird2002'  # 使用文件中的密码保证安全性
-      - 'POSTGRES_USER=oj'  # 默认用户
+      - 'POSTGRES_USER=oj'
     ports:
       - '5432:5432'
     volumes:
@@ -35,8 +35,6 @@ services:
       - 'RABBITMQ_DEFAULT_USER=oj'
     ports:
       - '5672'
-    secrets:
-      - mq_pwd
   redis:  # redis缓存
     image: 'redis:latest'
     restart: always
@@ -48,10 +46,6 @@ services:
     volumes:
       - ./data/redis:/data
       - ./config/redis.conf:/etc/redis/redis.conf
-    secrets:
-      - redis_pwd
 secrets:  # 密码文件配置
-  redis_pwd:
-    file: ./config/pwd/redis_pwd.txt
   mq_pwd:
     file: ./config/pwd/mq_pwd.txt

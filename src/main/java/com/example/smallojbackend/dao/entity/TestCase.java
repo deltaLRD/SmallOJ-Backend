@@ -1,18 +1,21 @@
 package com.example.smallojbackend.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
 
 @Data
-@TableName("users")
-public class User {
+@TableName("testcases")
+public class TestCase {
     @TableId
     private Long id;
-    private String username;
-    private String password;
-    private String email;
+    private Long pid;
+    private Long type;
+    private String input;
+    private String ans;
     private Integer deleted;
     @TableField("created_at")
     private OffsetDateTime createdAt;
