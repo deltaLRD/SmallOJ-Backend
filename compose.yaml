@@ -6,6 +6,7 @@ services:
     environment:
       - 'POSTGRES_DB=oj'  # 默认数据库
       - 'POSTGRES_PASSWORD=Lird2002'  # 使用文件中的密码保证安全性
+      - 'POSTGRES_USER=oj'
     ports:
       - '5432:5432'
     volumes:

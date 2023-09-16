@@ -2,6 +2,7 @@ spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/oj
         password: Lird2002
+        username: oj
     data:
       redis:
         host: localhost
