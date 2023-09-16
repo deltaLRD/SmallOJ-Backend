@@ -7,4 +7,6 @@ import com.example.smallojbackend.common.CreateProblemRequest;
 public interface ProblemService {
     BasicResponse getAllProblem(AllProblemRequest request);
     BasicResponse createProblem(CreateProblemRequest request);
+    BasicResponse getProblem(Long id);
+    BasicResponse getProblemMd(Long id);
 }
