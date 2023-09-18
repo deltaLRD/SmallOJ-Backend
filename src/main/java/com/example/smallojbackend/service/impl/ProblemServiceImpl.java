@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.smallojbackend.common.*;
 import com.example.smallojbackend.dao.entity.Problem;
+import com.example.smallojbackend.dao.entity.TestCase;
 import com.example.smallojbackend.dao.mapper.ProblemMapper;
+import com.example.smallojbackend.dao.mapper.TestCaseMapper;
 import com.example.smallojbackend.service.ProblemService;
 import com.example.smallojbackend.utils.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 public class ProblemServiceImpl implements ProblemService {
     @Autowired
     ProblemMapper problemMapper;
+    @Autowired
+    TestCaseMapper testCaseMapper;
     @Override
     public BasicResponse getAllProblem(AllProblemRequest request) {
         IPage<Problem> page = new Page<>(request.getPage(), request.getPagesize());
@@ -111,6 +116,34 @@ public class ProblemServiceImpl implements ProblemService {
             BasicResponse response = new BasicResponse();
             response.setStatus_code(StatusCode.Failed);
             response.setStatus_msg("");
+            return response;
+        }
+    }
+
+    @Override
+    public BasicResponse uploadTestCase(Long id, UploadTestCaseRequest request) {
+        try {
+            TestCase testCase = new TestCase();
+            testCase.setPid(id);
+            String input;
+            InputStream inputStream = request.getInput().getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            input = bufferedReader.lines().collect(Collectors.joining("\n"));
+            testCase.setInput(input);
+            String ans;
+            inputStream = request.getAns().getInputStream();
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            ans = bufferedReader.lines().collect(Collectors.joining("\n"));
+            testCase.setAns(ans);
+            testCaseMapper.insert(testCase);
+            BasicResponse response = new BasicResponse();
+            response.setStatus_code(StatusCode.Success);
+            response.setStatus_msg("上传成功");
+            return response;
+        }catch (Exception e) {
+            BasicResponse response = new BasicResponse();
+            response.setStatus_code(StatusCode.Failed);
+            response.setStatus_msg("测试用例上传失败");
             return response;
         }
     }

@@ -3,6 +3,7 @@ package com.example.smallojbackend.controller;
 import com.example.smallojbackend.common.AllProblemRequest;
 import com.example.smallojbackend.common.BasicResponse;
 import com.example.smallojbackend.common.CreateProblemRequest;
+import com.example.smallojbackend.common.UploadTestCaseRequest;
 import com.example.smallojbackend.dao.entity.Problem;
 import com.example.smallojbackend.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class ProblemController {
     @GetMapping("/{id}/md")
     public BasicResponse getProblemMd(@PathVariable(name = "id") Long id) {
         return problemService.getProblemMd(id);
+    }
+
+    @PostMapping("/{id}/testcase")
+    public BasicResponse uploadTestCase(@PathVariable(name = "id") Long id, UploadTestCaseRequest request) {
+        return problemService.uploadTestCase(id, request);
     }
 }
