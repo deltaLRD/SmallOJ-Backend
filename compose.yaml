@@ -29,12 +29,13 @@ services:
   rabbitmq: # 消息队列中间件
     container_name: oj_mq
     restart: always
-    image: 'rabbitmq:latest'
+    image: 'rabbitmq:3-management-alpine'
     environment:
       - 'RABBITMQ_DEFAULT_PASS=secret'
       - 'RABBITMQ_DEFAULT_USER=oj'
     ports:
-      - '5672'
+      - '5672:5672'
+      - '15672:15672'
   redis:  # redis缓存
     image: 'redis:latest'
     restart: always
@@ -46,6 +47,3 @@ services:
     volumes:
       - ./data/redis:/data
       - ./config/redis.conf:/etc/redis/redis.conf
-secrets:  # 密码文件配置
-  mq_pwd:
-    file: ./config/pwd/mq_pwd.txt

@@ -15,6 +15,11 @@ spring:
             max-idle: 8
             max-wait: -1
             min-idle: 0
+    rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: oj
+      password: secret
 
 mybatis-plus:
   global-config:
