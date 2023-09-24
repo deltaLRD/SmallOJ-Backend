@@ -15,7 +15,10 @@ public class SubmissionController {
     @Autowired
     SubmissionService submissionService;
     @PostMapping("/")
-    public BasicResponse uploadSubmission(@RequestParam("problem_id") String pid, @RequestParam("language") String language, @RequestParam("code") String code) {
+    public BasicResponse uploadSubmission(
+            @RequestParam("problem_id") Long pid, @RequestParam("language") String language,
+            @RequestParam("code") String code, @RequestParam("userid") String uid
+    ) {
         UploadSubmissionRequest request = new UploadSubmissionRequest();
         request.setProblemId(pid);
         request.setLanguage(language);

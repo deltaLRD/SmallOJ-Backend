@@ -2,6 +2,8 @@ package com.example.smallojbackend.service.impl;
 
 import com.example.smallojbackend.common.BasicResponse;
 import com.example.smallojbackend.common.UploadSubmissionRequest;
+import com.example.smallojbackend.dao.entity.Submission;
+import com.example.smallojbackend.dao.mapper.SubmissionMapper;
 import com.example.smallojbackend.service.SubmissionService;
 import com.example.smallojbackend.utils.StatusCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,12 +17,19 @@ import org.springframework.stereotype.Service;
 public class SubmissionServiceImpl implements SubmissionService {
     @Autowired
     RabbitTemplate rabbitTemplate;
+    @Autowired
+    SubmissionMapper submissionMapper;
     @Override
     public BasicResponse submission(UploadSubmissionRequest request) {
         try{
+            Submission submission = new Submission();
+            submission.setPid(request.getProblemId());
+            submission.setCode(request.getCode());
+            submission.setLanguage(request.getLanguage());
+            submission.setUid(request.getUid());
+            submissionMapper.insert(submission);
             ObjectMapper objectMapper = new ObjectMapper();
-            String requestJson = objectMapper.writeValueAsString(request);
-//            Message message = new Message(requestJson.getBytes());
+            String requestJson = objectMapper.writeValueAsString(submission);
             rabbitTemplate.convertAndSend("submission",requestJson);
             BasicResponse response = new BasicResponse();
             response.setStatus_msg("OK");

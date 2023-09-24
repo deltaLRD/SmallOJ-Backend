@@ -16,7 +16,7 @@ public class RabbitmqTest {
     @Test
     public void sendTest() {
         String language = "java";
-        String id = "1";
+        Long id = 1L;
         String code = """
                 import java.io.*;
                 import java.util.*;
@@ -25,13 +25,14 @@ public class RabbitmqTest {
                         Scanner cin = new Scanner(System.in);
                         int a = cin.nextInt();
                         int b = cin.nextInt();
-                        System.out.println(a + b);
+                        System.out.print(a + b);
                     }
                 }""";
         UploadSubmissionRequest request = new UploadSubmissionRequest();
         request.setCode(code);
         request.setLanguage(language);
         request.setProblemId(id);
+        request.setUid(1705792757837156354L);
         BasicResponse response = submissionService.submission(request);
         Assertions.assertEquals(response.getStatus_code(), StatusCode.Success);
     }

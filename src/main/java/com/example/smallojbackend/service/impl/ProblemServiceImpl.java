@@ -135,6 +135,7 @@ public class ProblemServiceImpl implements ProblemService {
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             ans = bufferedReader.lines().collect(Collectors.joining("\n"));
             testCase.setAns(ans);
+            testCase.setType(1L);
             testCaseMapper.insert(testCase);
             BasicResponse response = new BasicResponse();
             response.setStatus_code(StatusCode.Success);

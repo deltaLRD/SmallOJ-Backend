@@ -10,7 +10,7 @@ create table users(
 );
 
 create table problems(
-    id bigint not null primary key ,
+    id serial not null primary key ,
     name varchar(100) not null,
     level varchar(20) not null,
     describe text,

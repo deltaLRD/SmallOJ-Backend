@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
         response.setStatus_code(StatusCode.Success);
         response.setStatus_msg("");
         response.setToken(token);
+        response.setId(user.getId());
         return response;
     }
 }

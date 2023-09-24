@@ -3,15 +3,16 @@ package com.example.smallojbackend.common;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UploadSubmissionRequest {
-    private String problemId;
+    private Long problemId;
     private String language;
     private String code;
+    private Long uid;
 
-    public String getProblemId() {
+    public Long getProblemId() {
         return problemId;
     }
 
-    public void setProblemId(String problemId) {
+    public void setProblemId(Long problemId) {
         this.problemId = problemId;
     }
 
@@ -29,5 +30,13 @@ public class UploadSubmissionRequest {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 }
