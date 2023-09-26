@@ -16,14 +16,17 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/register")
-    public BasicResponse register(UserRegisterRequest request){
+    public BasicResponse register(@RequestBody UserRegisterRequest request){
         BasicResponse response = new BasicResponse();
         response = userService.register(request);
         return response;
     }
 
     @GetMapping(value = "/login")
-    public BasicResponse login(UserLoginRequest request) {
+    public BasicResponse login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        UserLoginRequest request = new UserLoginRequest();
+        request.setUsername(username);
+        request.setPassword(password);
         return userService.login(request);
     }
 }

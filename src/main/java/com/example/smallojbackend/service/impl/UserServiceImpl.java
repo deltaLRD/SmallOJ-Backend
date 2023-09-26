@@ -56,6 +56,8 @@ public class UserServiceImpl implements UserService {
         queryWrapper.eq("username", request.getUsername());
         User user = new User();
         user = userMapper.selectOne(queryWrapper);
+        System.out.println(request.getUsername());
+        System.out.println(request.getPassword());
         if(user == null){
             BasicResponse response = new BasicResponse();
             response.setStatus_code(StatusCode.Failed);
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService {
         response.setStatus_code(StatusCode.Success);
         response.setStatus_msg("");
         response.setToken(token);
-        response.setId(user.getId());
+        response.setId(user.getId().toString());
         return response;
     }
 }

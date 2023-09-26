@@ -1,5 +1,6 @@
 package com.example.smallojbackend.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,10 +12,10 @@ import java.time.OffsetDateTime;
 @TableName("verdicts")
 public class Verdict {
     @TableId
-    private Long id;
-    private Long sid;
-    private Long tid;
-    private Long status;
+    private String id;
+    private String sid;
+    private String tid;
+    private String status;
     @TableField("exec_time")
     private Long execTime;
     private Integer deleted;
@@ -22,4 +23,8 @@ public class Verdict {
     private OffsetDateTime createdAt;
     @TableField("updated_at")
     private OffsetDateTime updatedAt;
+    @TableField(value = "count(*)", insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
+    private Long count;
+    @TableField(value = "success_count", insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
+    private Long successCount;
 }

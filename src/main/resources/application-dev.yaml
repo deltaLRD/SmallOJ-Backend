@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oj
+    password: Lird2002
+    username: oj
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      connect-timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 8
+          max-wait: -1
+          min-idle: 0
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: oj
+    password: secret
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
