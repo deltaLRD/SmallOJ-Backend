@@ -58,10 +58,7 @@ public class ProblemServiceImpl implements ProblemService {
             Problem problem = new Problem();
             problem.setName(request.getName());
             problem.setLevel(request.getLevel());
-            String markdownFile = new String();
-            InputStream inputStream = request.getMarkdown().getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            markdownFile = reader.lines().collect(Collectors.joining("\n"));
+            String markdownFile = request.getMarkdown();
             problem.setDescribe(markdownFile);
             problemMapper.insert(problem);
             BasicResponse response = new BasicResponse();
@@ -125,16 +122,8 @@ public class ProblemServiceImpl implements ProblemService {
         try {
             TestCase testCase = new TestCase();
             testCase.setPid(id);
-            String input;
-            InputStream inputStream = request.getInput().getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            input = bufferedReader.lines().collect(Collectors.joining("\n"));
-            testCase.setInput(input);
-            String ans;
-            inputStream = request.getAns().getInputStream();
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            ans = bufferedReader.lines().collect(Collectors.joining("\n"));
-            testCase.setAns(ans);
+            testCase.setInput(request.getInput());
+            testCase.setAns(request.getAns());
             testCase.setType(1L);
             testCaseMapper.insert(testCase);
             BasicResponse response = new BasicResponse();

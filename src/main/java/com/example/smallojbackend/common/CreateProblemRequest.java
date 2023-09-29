@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class CreateProblemRequest extends BasicResponse{
     private String name;
     private String level;
-    private MultipartFile markdown;
+    private String markdown;
 
     public String getName() {
         return name;
@@ -23,11 +23,11 @@ public class CreateProblemRequest extends BasicResponse{
         this.level = level;
     }
 
-    public MultipartFile getMarkdown() {
+    public String getMarkdown() {
         return markdown;
     }
 
-    public void setMarkdown(MultipartFile markdown) {
+    public void setMarkdown(String markdown) {
         this.markdown = markdown;
     }
 }

@@ -78,6 +78,7 @@ public class UserServiceImpl implements UserService {
         response.setStatus_msg("");
         response.setToken(token);
         response.setId(user.getId().toString());
+        response.setUsername(request.getUsername());
         return response;
     }
 }

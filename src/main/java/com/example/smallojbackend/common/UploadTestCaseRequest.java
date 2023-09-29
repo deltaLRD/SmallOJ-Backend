@@ -4,8 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadTestCaseRequest {
     private String type;
-    private MultipartFile input;
-    private MultipartFile ans;
+    private String input;
+    private String ans;
 
     public String getType() {
         return type;
@@ -15,19 +15,19 @@ public class UploadTestCaseRequest {
         this.type = type;
     }
 
-    public MultipartFile getInput() {
+    public String getInput() {
         return input;
     }
 
-    public void setInput(MultipartFile input) {
+    public void setInput(String input) {
         this.input = input;
     }
 
-    public MultipartFile getAns() {
+    public String getAns() {
         return ans;
     }
 
-    public void setAns(MultipartFile ans) {
+    public void setAns(String ans) {
         this.ans = ans;
     }
 }

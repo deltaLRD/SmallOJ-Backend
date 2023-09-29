@@ -1,9 +1,6 @@
 package com.example.smallojbackend.controller;
 
-import com.example.smallojbackend.common.AllProblemRequest;
-import com.example.smallojbackend.common.BasicResponse;
-import com.example.smallojbackend.common.CreateProblemRequest;
-import com.example.smallojbackend.common.UploadTestCaseRequest;
+import com.example.smallojbackend.common.*;
 import com.example.smallojbackend.dao.entity.Problem;
 import com.example.smallojbackend.service.ProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +23,7 @@ public class ProblemController {
     }
 
     @PostMapping("/")
-    public BasicResponse createProblem(@RequestParam("name") String name, @RequestParam("level") String level, @RequestParam("markdown") MultipartFile file){
-        CreateProblemRequest request = new CreateProblemRequest();
-        request.setLevel(level);
-        request.setName(name);
-        request.setMarkdown(file);
+    public BasicResponse createProblem(@RequestBody CreateProblemRequest request){
         return problemService.createProblem(request);
     }
 
@@ -47,14 +40,11 @@ public class ProblemController {
     @PostMapping("/{id}/testcase")
     public BasicResponse uploadTestCase(
             @PathVariable(name = "id") Long id,
-            @RequestParam("type") String type,
-            @RequestParam("input") MultipartFile input,
-            @RequestParam("ans") MultipartFile ans
+            @RequestBody UploadTestCaseRequest request
     ) {
-        UploadTestCaseRequest request = new UploadTestCaseRequest();
-        request.setAns(ans);
-        request.setInput(input);
-        request.setType(type);
+        System.out.println(request.getInput());
+        System.out.println(request.getAns());
+        System.out.println(id);
         return problemService.uploadTestCase(id, request);
     }
 }
